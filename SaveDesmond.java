@@ -1,5 +1,5 @@
 //===================================================================
-//SaveDesmond13
+//SaveDesmond
 //Jacob Brian Felushko.
 //January 20th, 2023.
 //Java, version 1.8.
@@ -13,7 +13,7 @@ import java.io.*;   //Allow access to objects within the IO library
 import java.util.Random;    //Allow access to object random
 import java.util.ArrayList;     //Allow usage of data type ArrayList 
 import java.util.Arrays;    //Allow usage of commands within the Arrays library
-public class SaveDesmond {    //Start of class SaveDesmond13
+public class SaveDesmond {    //Start of class SaveDesmond
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));    //static Declaration and instantiation of a BufferedReader object.
 	static Random rng = new Random();   //static Declaration and instatiation of a Random object
     static SaveDesmond sD = new SaveDesmond();  //static Declaration and instatiation of a class object
@@ -490,8 +490,10 @@ public class SaveDesmond {    //Start of class SaveDesmond13
                             }
                         }
                         else if(gameBoard[playerX][playerY+1]==SANDPIT){
-                            gameBoard=sD.pitFall(playerName, gameBoard, playerMoves, PLAYER);
-                            gameBoard[playerX][playerY]=DESMOND;
+                            gameBoard=sD.pitFall(playerName, gameBoard, playerMoves, PLAYER, hasDesmond);
+                            if(hasDesmond==true){
+                                gameBoard[playerX][playerY]=DESMOND;
+                            }
                         }
                         else if(gameBoard[playerX][playerY+1]==WALL){
                             gameBoard=sD.wall(gameBoard);
@@ -528,8 +530,10 @@ public class SaveDesmond {    //Start of class SaveDesmond13
                             }
                         }
                         else if(gameBoard[playerX][playerY-1]==SANDPIT){
-                            gameBoard=sD.pitFall(playerName, gameBoard, playerMoves, PLAYER);
-                            gameBoard[playerX][playerY]=DESMOND;
+                            gameBoard=sD.pitFall(playerName, gameBoard, playerMoves, PLAYER, hasDesmond);
+                            if(hasDesmond==true){
+                                gameBoard[playerX][playerY]=DESMOND;
+                            }
                         }
                         else if(gameBoard[playerX][playerY-1]==WALL){
                             gameBoard=sD.wall(gameBoard);
@@ -566,8 +570,10 @@ public class SaveDesmond {    //Start of class SaveDesmond13
                             }
                         }
                         else if(gameBoard[playerX-1][playerY]==SANDPIT){
-                            gameBoard=sD.pitFall(playerName, gameBoard, playerMoves, PLAYER);
-                            gameBoard[playerX][playerY]=DESMOND;
+                            gameBoard=sD.pitFall(playerName, gameBoard, playerMoves, PLAYER, hasDesmond);
+                            if(hasDesmond==true){
+                                gameBoard[playerX][playerY]=DESMOND;
+                            }
                         }
                         else if(gameBoard[playerX-1][playerY]==WALL){
                             gameBoard=sD.wall(gameBoard);
@@ -604,8 +610,10 @@ public class SaveDesmond {    //Start of class SaveDesmond13
                             }
                         }
                         else if(gameBoard[playerX+1][playerY]==SANDPIT){
-                            gameBoard[playerX][playerY]=DESMOND;
-                            gameBoard=sD.pitFall(playerName, gameBoard, playerMoves, PLAYER);
+                            if(hasDesmond==true){
+                                gameBoard[playerX][playerY]=DESMOND;
+                            }
+                            gameBoard=sD.pitFall(playerName, gameBoard, playerMoves, PLAYER, hasDesmond);
                         }
                         else if(gameBoard[playerX+1][playerY]==WALL){
                             gameBoard=sD.wall(gameBoard);
@@ -1910,8 +1918,8 @@ public class SaveDesmond {    //Start of class SaveDesmond13
      * 
      * @return gameBoard <type int[][]>
      */
-    private int[][] pitFall(String playerName, int[][] gameBoard, ArrayList<ArrayList<Integer>> playerMoves, final int PLAYER)throws InterruptedException, IOException{
-        if(rng.nextInt(2)==1){
+    private int[][] pitFall(String playerName, int[][] gameBoard, ArrayList<ArrayList<Integer>> playerMoves, final int PLAYER, boolean hasDesmond)throws InterruptedException, IOException{
+        if(hasDesmond==true){
             System.out.println(" \n _______________________________________");
             System.out.println("|\t"+playerName+"\t\t\t\t|");
             System.out.println("|\tDROPS DESMOND!!!\t\t|");
